@@ -1,5 +1,9 @@
 require 'spec_helper'
 
+class TestList < ActiveRecord::Base
+  include Ruzai2
+end
+
 describe Ruzai2 do
   it 'has a version number' do
     expect(Ruzai2::VERSION).not_to be nil

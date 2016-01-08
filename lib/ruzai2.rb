@@ -1,14 +1,17 @@
 require "ruzai2/version"
+require "active_support"
+require "active_support/core_ext"
+require "active_record"
 
 module Ruzai2
-  class RuzaiList
+  class RuzaiList < ActiveRecord::Base
     class << self
       def ban!(user_id, hoge_id, fuga_id, expired_at: nil)
         RuzaiList.create(
           user_id: user_id,
           hoge_id: hoge_id,
           fuga_id: fuga_id,
-          expired_at: expired_at || Time.zone.now + 7.days
+          expired_at: expired_at || Time.now + 7.days
         )
       end
 
@@ -17,7 +20,7 @@ module Ruzai2
           user_id: user_id,
           hoge_id: hoge_id,
           fuga_id: fuga_id,
-        ).where("expired_at < ?", Time.zone.now).exist?
+        ).where("expired_at < ?", Time.now).exist?
       end
     end
   end
