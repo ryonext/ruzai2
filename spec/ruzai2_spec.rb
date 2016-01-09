@@ -18,7 +18,7 @@ describe Ruzai2 do
       let(:fuga_id) { 3 }
 
       it "creates RuzaiList record." do
-        expect(subject).to change { Ruzai2::RuzaiList.count }
+        expect { subject }.to change { Ruzai2::RuzaiList.count }.by 1
       end
     end
   end
