@@ -4,9 +4,9 @@ ActiveRecord::Base.establish_connection :test
 class CreateAllTables < ActiveRecord::Migration
   def self.up
     create_table(:ruzai_lists) do |t|
-      t.integer :user_id
-      t.integer :hoge_id
-      t.integer :fuga_id
+      t.integer :test_id1
+      t.integer :test_id2
+      t.integer :test_id3
       t.datetime :expired_at
     end
   end
