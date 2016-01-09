@@ -6,12 +6,12 @@ require "active_record"
 module Ruzai2
   class RuzaiList < ActiveRecord::Base
     class << self
-      def ban!(user_id, hoge_id, fuga_id, expired_at: nil)
-        RuzaiList.create(
-          user_id: user_id,
-          hoge_id: hoge_id,
-          fuga_id: fuga_id,
+      def ban!(id_params, expired_at: nil)
+        params = id_params.merge(
           expired_at: expired_at || Time.now + 7.days
+        )
+        RuzaiList.create(
+          params
         )
       end
 
