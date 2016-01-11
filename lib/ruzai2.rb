@@ -15,12 +15,10 @@ module Ruzai2
         )
       end
 
-      def banned?(user_id, hoge_id, fuga_id)
+      def banned?(id_params)
         RuzaiList.where(
-          user_id: user_id,
-          hoge_id: hoge_id,
-          fuga_id: fuga_id,
-        ).where("expired_at < ?", Time.now).exist?
+          id_params
+        ).where("expired_at > ?", Time.now).exists?
       end
     end
   end
