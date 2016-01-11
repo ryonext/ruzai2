@@ -22,4 +22,24 @@ describe Ruzai2 do
       end
     end
   end
+
+  describe ".banned?" do
+    before do
+      Ruzai2::RuzaiList.ban!(id_params)
+    end
+
+    let(:id_params) {
+      {
+        test_id1: 1,
+        test_id2: 2,
+        test_id3: 3,
+      }
+    }
+
+    subject { Ruzai2::RuzaiList.banned?(id_params) }
+
+    it "returns true" do
+      expect(subject).to be true
+    end
+  end
 end
