@@ -41,5 +41,17 @@ describe Ruzai2 do
     it "returns true" do
       expect(subject).to be true
     end
+
+    context "not banned" do
+
+    end
+
+    context "expired" do
+
+    end
+
+    context "only 1 id in 3 ids is banned." do
+
+    end
   end
 end
