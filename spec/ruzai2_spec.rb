@@ -24,9 +24,7 @@ describe Ruzai2 do
   end
 
   describe ".banned?" do
-    before do
-      Ruzai2::RuzaiList.ban!(id_params)
-    end
+    subject { Ruzai2::RuzaiList.banned?(id_params) }
 
     let(:id_params) {
       {
@@ -36,18 +34,32 @@ describe Ruzai2 do
       }
     }
 
-    subject { Ruzai2::RuzaiList.banned?(id_params) }
+    context "banned" do
+      before do
+        Ruzai2::RuzaiList.ban!(id_params)
+      end
 
-    it "returns true" do
-      expect(subject).to be true
+      it "returns true" do
+        expect(subject).to be true
+      end
     end
 
     context "not banned" do
-
+      it "returns false" do
+        expect(subject).to be false
+      end
     end
 
     context "expired" do
+      before do
+        Ruzai2::RuzaiList.ban!(id_params)
+      end
 
+      it "returns false" do
+        Timecop.freeze(Date.today + 8) do
+          expect(subject).to be false
+        end
+      end
     end
 
     context "only 1 id in 3 ids is banned." do
