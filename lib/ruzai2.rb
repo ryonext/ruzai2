@@ -16,14 +16,10 @@ module Ruzai2
       end
 
       def banned?(id_params)
-        id_params.each do |k, v|
-          if RuzaiList.where(
-            k => v
-          ).where("expired_at > ?", Time.now).exists?
-            return true
-          end
+        queries = id_params.map do |k, v|
+          RuzaiList.arel_table[k.to_sym].eq(v)
         end
-        false
+        RuzaiList.where(queries.inject(:or)).where("expired_at > ?", Time.now).exists?
       end
     end
   end

@@ -65,7 +65,29 @@ describe Ruzai2 do
     context "only 1 id in 3 ids is banned." do
       let(:banned_id_params) {
         {
-          test_id1: 1
+          test_id2: 2
+        }
+      }
+      before do
+        Ruzai2::RuzaiList.ban!(banned_id_params)
+      end
+
+      it "returns true" do
+        expect(subject).to be true
+      end
+    end
+
+    context "3 id is banned and search by 1 id." do
+      let(:id_params) {
+        {
+          test_id2: 2
+        }
+      }
+      let(:banned_id_params) {
+        {
+          test_id1: 1,
+          test_id2: 2,
+          test_id3: 3,
         }
       }
       before do
