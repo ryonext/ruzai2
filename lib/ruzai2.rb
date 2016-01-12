@@ -16,9 +16,14 @@ module Ruzai2
       end
 
       def banned?(id_params)
-        RuzaiList.where(
-          id_params
-        ).where("expired_at > ?", Time.now).exists?
+        id_params.each do |k, v|
+          if RuzaiList.where(
+            k => v
+          ).where("expired_at > ?", Time.now).exists?
+            return true
+          end
+        end
+        false
       end
     end
   end
